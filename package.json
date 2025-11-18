@@ -1,7 +1,7 @@
 {
   "name": "object-definition-language-extension",
   "displayName": "Object Definition Language",
-  "description": "A Visual Studio Code extension with basic syntax highlighting for prplOS Object Definition Language.",
+  "description": "Basic syntax highlighting for prplOS Object Definition Language.",
   "version": "0.0.1",
   "license": "MIT",
   "publisher": "luxinbo",
