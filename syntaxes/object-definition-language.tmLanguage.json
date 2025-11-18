@@ -3,27 +3,189 @@
 	"name": "Object Definition Language",
 	"patterns": [
 		{
-			"include": "#keywords"
+			"include": "#comments"
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#variables"
+		},
+		{
+			"include": "#attributes"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#resolvers"
+		},
+		{
+			"include": "#sections"
 		}
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.object-definition-language",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.object-definition-language",
-			"begin": "\"",
-			"end": "\"",
+		"comments": {
 			"patterns": [
 				{
-					"name": "constant.character.escape.object-definition-language",
-					"match": "\\\\."
+					"name": "comment.line.double-slash.object-definition-language",
+					"match": "//.*$"
+				},
+				{
+					"name": "comment.block.object-definition-language",
+					"begin": "/\\*",
+					"end": "\\*/"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.object-definition-language",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.object-definition-language",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name": "string.quoted.single.object-definition-language",
+					"begin": "'",
+					"end": "'",
+					"patterns": [
+						{
+							"name": "constant.character.escape.object-definition-language",
+							"match": "\\\\."
+						}
+					]
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.hex.object-definition-language",
+					"match": "0[xX][0-9a-fA-F]+"
+				},
+				{
+					"name": "constant.numeric.octal.object-definition-language",
+					"match": "0[0-7]+"
+				},
+				{
+					"name": "constant.numeric.binary.object-definition-language",
+					"match": "0[bB][01]+"
+				},
+				{
+					"name": "constant.numeric.decimal.object-definition-language",
+					"match": "[+-]?\\d+"
+				}
+			]
+		},
+		"variables": {
+			"patterns": [
+				{
+					"name": "variable.other.object-definition-language",
+					"match": "\\$\\{[^}]+\\}"
+				},
+				{
+					"name": "variable.other.object-definition-language",
+					"match": "\\$\\([^)]+\\)"
+				}
+			]
+		},
+		"attributes": {
+			"patterns": [
+				{
+					"name": "storage.modifier.object-definition-language",
+					"match": "%[a-zA-Z][a-zA-Z0-9_-]*"
+				},
+				{
+					"name": "storage.modifier.object-definition-language",
+					"match": "![a-zA-Z][a-zA-Z0-9_-]*"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.object-definition-language",
+					"match": "\\b(action|add|as|call|counted|default|entry-point|event|extend|false|filter|import|include|instance|mib|object|of|on|parameter|print|regexp|requires|select|synchronize|true|using|with)\\b"
+				},
+				{
+					"name": "keyword.control.object-definition-language",
+					"match": "(?i)\\b(RTLD_GLOBAL|RTLD_NODELETE|RTLD_NOW)\\b"
+				}
+			]
+		},
+		"types": {
+			"name": "storage.type.object-definition-language",
+			"match": "\\b(bool|csv_string|datetime|double|fd|htable|int8|int16|int32|int64|list|ssv_string|string|uint8|uint16|uint32|uint64|variant|void)\\b"
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.assignment.object-definition-language",
+					"match": "\\+=|="
+				},
+				{
+					"name": "keyword.operator.synchronize.object-definition-language",
+					"match": "<->|<-|->"
+				}
+			]
+		},
+		"resolvers": {
+			"name": "meta.function-resolver.object-definition-language",
+			"begin": "<!",
+			"end": "!>",
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		"sections": {
+			"patterns": [
+				{
+					"name": "meta.section.config.object-definition-language",
+					"begin": "%config\\s*\\{",
+					"end": "\\}",
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				},
+				{
+					"name": "meta.section.define.object-definition-language",
+					"begin": "%define\\s*\\{",
+					"end": "\\}",
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				},
+				{
+					"name": "meta.section.populate.object-definition-language",
+					"begin": "%populate\\s*\\{",
+					"end": "\\}",
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
 				}
 			]
 		}
