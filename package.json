@@ -4,14 +4,14 @@
   "description": "A Visual Studio Code extension with basic syntax highlighting for prplOS Object Definition Language.",
   "version": "0.0.1",
   "license": "MIT",
-  "publisher": "LU, Xinbo",
+  "publisher": "luxinbo",
   "repository": {
     "type": "git",
     "url": "https://github.com/lxb007981/object-definition-language-extension"
   },
   "icon": "resources/extension-icon.png",
   "engines": {
-    "vscode": "^1.103.0"
+    "vscode": "^1.74.0"
   },
   "categories": [
     "Programming Languages"
