@@ -1,0 +1,36 @@
+name: build
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
+  pull_request:
+
+jobs:
+  vsix-build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - name: Setup jq
+        uses: dcarbone/install-jq-action@v3
+      - name: Read package.json
+        id: package_info
+        run: |
+          jq -r '"name=\(.name)\nversion=\(.version)"' package.json >> $env:GITHUB_OUTPUT
+      - name: Build
+        run: |
+          npx @vscode/vsce package
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.package_info.outputs.name }}-${{ steps.package_info.outputs.version }}
+          path: ./*.vsix
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+            files: ./*.vsix
