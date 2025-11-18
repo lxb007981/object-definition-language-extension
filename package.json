@@ -1,0 +1,25 @@
+{
+  "name": "object-definition-language-extension",
+  "displayName": "object-definition-language-extension",
+  "description": "Provides basic syntax highlighting for prplos Object Definition Language.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "object-definition-language",
+      "aliases": ["Object Definition Language", "object-definition-language"],
+      "extensions": [".odl"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "object-definition-language",
+      "scopeName": "source.odl",
+      "path": "./syntaxes/object-definition-language.tmLanguage.json"
+    }]
+  }
+}
