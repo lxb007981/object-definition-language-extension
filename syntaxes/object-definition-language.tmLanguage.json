@@ -121,7 +121,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.object-definition-language",
-					"match": "(?<!-)\\b(action|add|as|call|contains|counted|default|entry-point|event|extend|false|filter|import|include|instance|matches|mib|object|of|on|parameter|print|regexp|requires|select|synchronize|true|using|with)\\b(?!-)"
+					"match": "(?<!-)\\b(action|add|as|call|contains|counted|default|entry-point|event|extend|false|filter|import|include|instance|matches|mib|object|of|on|parameter|print|regexp|requires|select|synchronize|true|userflags|using|with)\\b(?!-)"
 				},
 				{
 					"name": "keyword.control.object-definition-language",
