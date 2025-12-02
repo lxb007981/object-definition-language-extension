@@ -17,10 +17,31 @@ jobs:
           node-version: 22.x
       - name: Setup jq
         uses: dcarbone/install-jq-action@v3
+
       - name: Read package.json
         id: package_info
         run: |
           jq -r '"name=\(.name)\nversion=\(.version)"' package.json >> $env:GITHUB_OUTPUT
+
+      - name: Check Version Mismatch
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          $tagVersion = "${{ github.ref_name }}"
+          $packageVersion = "${{ steps.package_info.outputs.version }}"
+
+          if ($tagVersion.StartsWith('v')) {
+            $tagVersion = $tagVersion.Substring(1)
+          }
+
+          Write-Host "Git Tag: $tagVersion"
+          Write-Host "Package Version: $packageVersion"
+
+          if ($tagVersion -ne $packageVersion) {
+            Write-Error "Version mismatch! Tag is '$tagVersion' but package.json is '$packageVersion'."
+            exit 1
+          }
+          Write-Host "Versions match. Proceeding..."
+
       - name: Build
         run: |
           npx @vscode/vsce package
