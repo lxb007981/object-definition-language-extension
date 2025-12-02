@@ -77,19 +77,19 @@
 			"patterns": [
 				{
 					"name": "constant.numeric.hex.object-definition-language",
-					"match": "0[xX][0-9a-fA-F]+"
+					"match": "(?<![\\w-])0[xX][0-9a-fA-F]+(?![\\w-])"
 				},
 				{
 					"name": "constant.numeric.octal.object-definition-language",
-					"match": "0[0-7]+"
+					"match": "(?<![\\w-])0[0-7]+(?![\\w-])"
 				},
 				{
 					"name": "constant.numeric.binary.object-definition-language",
-					"match": "0[bB][01]+"
+					"match": "(?<![\\w-])0[bB][01]+(?![\\w-])"
 				},
 				{
 					"name": "constant.numeric.decimal.object-definition-language",
-					"match": "[+-]?\\d+"
+					"match": "(?<![\\w-])[+-]?\\d+(?![\\w-])"
 				}
 			]
 		},
@@ -121,17 +121,21 @@
 			"patterns": [
 				{
 					"name": "keyword.control.object-definition-language",
-					"match": "\\b(action|add|as|call|counted|default|entry-point|event|extend|false|filter|import|include|instance|mib|object|of|on|parameter|print|regexp|requires|select|synchronize|true|using|with)\\b"
+					"match": "(?<!-)\\b(action|add|as|call|contains|counted|default|entry-point|event|extend|false|filter|import|include|instance|matches|mib|object|of|on|parameter|print|regexp|requires|select|synchronize|true|using|with)\\b(?!-)"
 				},
 				{
 					"name": "keyword.control.object-definition-language",
-					"match": "(?i)\\b(RTLD_GLOBAL|RTLD_NODELETE|RTLD_NOW)\\b"
+					"match": "(?i)(?<!-)\\b(RTLD_GLOBAL|RTLD_NODELETE|RTLD_NOW)\\b(?!-)"
+				},
+				{
+					"name": "keyword.operator.logical.object-definition-language",
+					"match": "(?<!-)\\b(and|or|not)\\b(?!-)"
 				}
 			]
 		},
 		"types": {
 			"name": "storage.type.object-definition-language",
-			"match": "\\b(bool|csv_string|datetime|double|fd|htable|int8|int16|int32|int64|list|ssv_string|string|uint8|uint16|uint32|uint64|variant|void)\\b"
+			"match": "(?<!-)\\b(bool|csv_string|datetime|double|fd|htable|int8|int16|int32|int64|list|ssv_string|string|uint8|uint16|uint32|uint64|variant|void)\\b(?!-)"
 		},
 		"operators": {
 			"patterns": [
@@ -142,6 +146,10 @@
 				{
 					"name": "keyword.operator.synchronize.object-definition-language",
 					"match": "<->|<-|->"
+				},
+				{
+					"name": "keyword.operator.logical.object-definition-language",
+					"match": "&&|\\|\\| |(?<!-)\\b(and|or|not)\\b(?!-)"
 				}
 			]
 		},
